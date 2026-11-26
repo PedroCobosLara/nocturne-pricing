@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nocturne Pricing</title>
+  <meta name="description" content="Calcula el precio de venta de cada prenda de Nocturne Souls según costes, comisiones, IVA y margen.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script>
+    // Aplica el tema guardado (o el del sistema) antes de pintar, para evitar parpadeos
+    try {
+      var t = localStorage.getItem("tema") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div id="estrellas" aria-hidden="true"></div>
+  <header class="top">
+    <p class="brand">Nocturne Souls</p>
+    <button id="tema" class="toggle" type="button" aria-label="Cambiar entre modo claro y oscuro">Cambiar tema</button>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="titulo">
+      <h1 id="titulo">¿A cuánto vender cada prenda?</h1>
+      <p class="lead">Rellena los costes y el margen que quieres. El precio se recalcula al momento.</p>
+
+      <form id="form" novalidate>
+        <fieldset>
+          <legend>Costes por prenda</legend>
+          <label>Producción (proveedor) <input id="producto" type="number" min="0" step="0.01" value="12.00" inputmode="decimal"><span>€</span></label>
+          <label>Envío que pagas tú <input id="envio" type="number" min="0" step="0.01" value="4.50" inputmode="decimal"><span>€</span></label>
+          <label>Embalaje y otros <input id="extra" type="number" min="0" step="0.01" value="0.50" inputmode="decimal"><span>€</span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Comisiones e impuestos</legend>
+          <p class="hint">Valores de ejemplo: ajústalos a tu plan de Shopify y a tu pasarela de pago.</p>
+          <label>Pasarela de pago (%) <input id="pasarela" type="number" min="0" step="0.1" value="2.9" inputmode="decimal"><span>%</span></label>
+          <label>Pasarela, parte fija <input id="fija" type="number" min="0" step="0.01" value="0.30" inputmode="decimal"><span>€</span></label>
+          <label>Comisión extra de Shopify (%) <input id="shopify" type="number" min="0" step="0.1" value="0" inputmode="decimal"><span>%</span></label>
+          <label>IVA (%) <input id="iva" type="number" min="0" step="0.1" value="21" inputmode="decimal"><span>%</span></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Objetivo</legend>
+          <label>Margen deseado sobre el precio sin IVA <input id="margen" type="number" min="0" max="90" step="1" value="40" inputmode="decimal"><span>%</span></label>
+        </fieldset>
+      </form>
+    </section>
+
+    <aside class="result" aria-live="polite" aria-label="Resultado">
+      <p class="label">Precio recomendado</p>
+      <p id="precio" class="price">—</p>
+      <p id="detalle" class="sub"></p>
+
+      <div id="barra" class="bar" role="img" aria-label="Reparto del precio"></div>
+      <ul id="leyenda" class="legend"></ul>
+
+      <dl class="facts">
+        <div><dt>Precio mínimo para no perder</dt><dd id="minimo">—</dd></div>
+        <div><dt>Beneficio por venta</dt><dd id="beneficio">—</dd></div>
+        <div><dt>Margen real</dt><dd id="real">—</dd></div>
+      </dl>
+      <p id="error" class="error" hidden></p>
+    </aside>
+  </main>
+
+  <footer class="foot">Proyecto de Pedro Cobos Lara · Datos de ejemplo, ningún dato real de la tienda.</footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* ---------- Colores: tema oscuro por defecto ---------- */
+:root {
+  --bg: #08070c;
+  --glass: rgba(20, 18, 28, .68);
+  --line: rgba(222, 216, 240, .14);
+  --text: #eeeaf5;
+  --muted: #a29db6;
+  --accent: #e23a5e;              /* color de la marca: cámbialo aquí */
+  --glow: rgba(226, 58, 94, .18);
+  --price: #ffffff;
+  --c-costes: #8a89a6;
+  --c-comisiones: #b57a98;
+  --c-iva: #566080;
+  --profit: #e23a5e;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+:root[data-theme="light"] {
+  --bg: #f2efe9;
+  --glass: rgba(255, 255, 255, .74);
+  --line: rgba(21, 18, 27, .14);
+  --text: #15121b;
+  --muted: #5e586d;
+  --accent: #b3203f;
+  --glow: rgba(179, 32, 63, .12);
+  --price: #15121b;
+  --c-costes: #6f6d8a;
+  --c-comisiones: #a0577a;
+  --c-iva: #4a5578;
+  --profit: #b3203f;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; min-height: 100vh; position: relative; overflow-x: hidden; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 85% -10%, var(--glow), transparent 60%); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Estrellas de fondo (solo se ven en modo oscuro) */
+#estrellas { position: fixed; inset: 0; z-index: -1; pointer-events: none; transition: opacity .8s; }
+#estrellas i { position: absolute; border-radius: 50%; background: #fff; opacity: .5; animation: tw 3s ease-in-out infinite; }
+:root[data-theme="light"] #estrellas { opacity: 0; }
+@keyframes tw { 0%, 100% { opacity: .1; } 50% { opacity: .85; } }
+
+/* Cabecera */
+.top { display: flex; justify-content: space-between; align-items: center; max-width: 1040px; margin: 0 auto; padding: 20px 20px 0; }
+.brand { margin: 0; font-family: var(--serif); font-size: 1.2rem; letter-spacing: .06em; font-style: italic; }
+.toggle { background: var(--glass); color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: .9rem; cursor: pointer; backdrop-filter: blur(10px); transition: transform .2s, border-color .2s; }
+.toggle:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+/* Estructura */
+.layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; max-width: 1040px; margin: 0 auto; padding: 32px 20px 48px; align-items: start; }
+h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; margin: 0 0 8px; font-weight: 600; }
+.lead { color: var(--muted); margin: 0 0 28px; max-width: 46ch; }
+
+/* Tarjetas de cristal: fondo translúcido, borde fino y resplandor en modo oscuro */
+fieldset, .result { background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); box-shadow: 0 0 28px var(--glow); }
+fieldset { border-radius: 14px; margin: 0 0 16px; padding: 8px 20px 16px; transition: border-color .25s, transform .25s; }
+fieldset:hover, fieldset:focus-within { border-color: var(--accent); transform: translateY(-2px); }
+legend { padding: 0 8px; font-weight: 600; color: var(--accent); }
+.hint { color: var(--muted); font-size: .85rem; margin: 4px 0 8px; }
+label { display: grid; grid-template-columns: 1fr 110px 20px; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+label:last-child { border-bottom: 0; }
+label span { color: var(--muted); }
+input { width: 100%; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; text-align: right; transition: border-color .2s, box-shadow .2s; }
+input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); outline: none; }
+
+/* Resultado */
+.result { position: sticky; top: 20px; border-radius: 22px; padding: 28px; }
+.label { margin: 0; color: var(--muted); font-size: .95rem; }
+.price { margin: 4px 0 0; font-family: var(--serif); font-size: clamp(3.2rem, 9vw, 4.6rem); line-height: 1; color: var(--price); text-shadow: 0 0 28px var(--glow); }
+.sub { margin: 8px 0 20px; color: var(--muted); font-size: .9rem; min-height: 1.4em; }
+.bar { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: var(--line); }
+.bar span { height: 100%; transition: width .6s cubic-bezier(.2, .8, .2, 1); }
+.legend { list-style: none; margin: 14px 0 20px; padding: 0; display: grid; gap: 8px; }
+.legend li { display: grid; grid-template-columns: 14px 1fr auto; gap: 10px; align-items: center; font-size: .95rem; }
+.dot { width: 14px; height: 14px; border-radius: 4px; }
+.facts { margin: 0; border-top: 1px solid var(--line); }
+.facts div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; }
+.error { color: #ff8a8a; margin: 14px 0 0; }
+:root[data-theme="light"] .error { color: #b3261e; }
+.foot { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 20px 32px; }
+
+/* Animaciones (solo si la persona no ha pedido reducirlas) */
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrada: los paneles aparecen girando un poco hacia delante */
+  .panel, .result { animation: enter .6s cubic-bezier(.2, .8, .2, 1) backwards; transform-origin: 50% 0; }
+  .result { animation-delay: .12s; }
+  .price.pop { animation: pop .4s cubic-bezier(.2, 1.4, .4, 1); }
+  /* Cambio de tema: los colores se funden en lugar de saltar */
+  html.theming *, html.theming *::before, html.theming *::after {
+    transition: color .8s ease-in-out, background-color .8s ease-in-out, border-color .8s ease-in-out, box-shadow .8s ease-in-out !important;
+  }
+}
+@keyframes enter { from { opacity: 0; transform: perspective(900px) rotateX(6deg) translateY(18px); } }
+@keyframes pop { 0% { transform: scale(.94); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  #estrellas i { animation: none; opacity: .4; }
+  .bar span, fieldset, .toggle { transition: none; }
+}
+
+/* Móvil */
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .result { position: static; }
+}
+@media (max-width: 420px) {
+  label { grid-template-columns: 1fr 96px 16px; }
+}
