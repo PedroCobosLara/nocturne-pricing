@@ -80,7 +80,169 @@ input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); ou
 .facts dd { margin: 0; font-weight: 600; }
 .error { color: #ff8a8a; margin: 14px 0 0; }
 :root[data-theme="light"] .error { color: #b3261e; }
-.foot { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 20px 32px; }
+.foot { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 20px 32px;}
+
+
+/* ===== FOOTER ===== */
+
+.foot {
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    padding: 20px 20px 32px;
+}
+
+.footer-description {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.a {
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: color .2s ease;
+}
+
+.a:hover {
+    color: var(--accent);
+}
+
+.footer-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--accent);
+    flex-shrink: 0;
+    transition: fill .2s ease;
+}
+
+
+/* ===== VENTANA DE CONTACTO ===== */
+
+.contact-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.contact-overlay:target {
+    display: flex;
+}
+
+.contact-box {
+    position: relative;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 28px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 10px 35px var(--glow);
+    animation: aparecer .2s ease;
+}
+
+.contact-box h3 {
+    color: var(--accent);
+    margin: 0 0 5px;
+    font-family: var(--serif);
+    font-size: 1.4rem;
+}
+
+.contact-subtitle {
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-size: 14px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 18px 0;
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent);
+    flex-shrink: 0;
+}
+
+.contact-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+.contact-item span {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.contact-item a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+    transition: color .2s ease;
+}
+
+.contact-item a:hover {
+    color: var(--accent);
+}
+
+
+/* ===== BOTÓN CERRAR ===== */
+
+.contact-close {
+    position: absolute;
+    top: 10px;
+    right: 17px;
+    font-size: 25px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.contact-close:hover {
+    color: var(--muted);
+}
+
+
+/* ===== ANIMACIÓN ===== */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 
 /* Animaciones (solo si la persona no ha pedido reducirlas) */
 @media (prefers-reduced-motion: no-preference) {
